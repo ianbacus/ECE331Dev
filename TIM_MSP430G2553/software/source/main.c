@@ -18,13 +18,7 @@ volatile engine_t engineA=0, engineB=0;
 volatile uint16_t turnouts=0;
 volatile uint8_t resetFlag = 0;
 
-/** Delay function. **/
-void delay(unsigned int d) {
-  volatile uint32_t i;
-  for (i = 0; i<d; i++)
-  {
-  }
-}
+
 
 __attribute__((interrupt(USCIAB0TX_VECTOR))) void SSI_IRQHandler (void)
 {
@@ -163,12 +157,13 @@ __attribute__((interrupt(USCIAB0TX_VECTOR))) void SSI_IRQHandler (void)
 
 
 void main(void)
-{
+ {
 	uint16_t pinData;
 	volatile int index = 0,idleCount=0;
 	WDTCTL = WDTPW + WDTHOLD;                 // Stop watchdog timer
 	createPackets();  //For testing and development. Packets should be calculated and packed offline instead of on initialization
-	//P1DIR &= ~0x7f;
+	init_comparator();
+	initCommands_withPORT1();
 	initDCC_withSSI(1);
 	#ifdef REPROGRAM
 	index=0;
@@ -196,15 +191,37 @@ void main(void)
 	 __bis_SR_register(GIE);       //enable interrupts
 	 while(1)
 	 {
-		 pinData = P1IN&(~BIT1); //don't read the SSI pin
-		 pinData = (pinData&0x1) | (pinData>>1); //just to make it look nice... A/B.Sel/DSSS
-//		 engineA = pinData&0xf;
-//		 engineB = pinData&0xf;
-//		turnouts = 3 & (((0x40&pinData)>>6) | ((0x40&pinData)>>5)) ;
+		 //Port 1
+		 //[6] - direction
+		 //[5:3] - speed
+		 //[2] - SPI output (goes to comparator input)
+		 //[0] - comparator input
+		 //[7] - comparator output
 
-		 turnouts ^=3;
-		delay(0x4fff);
+		 //Port 2
+		 //[1:0] - turnouts
+		 //[2] - engine select
 
+		 pinData = (P1IN&0x38)>>3; //
+		 if( pinData > 4)
+		 {
+			 engineB = 2;
+			 engineB = 2;
+		 }
+		 else if ( pinData != 0)
+		 {
+			 engineA = 1;
+			 engineB = 1;
+		 }
+		 else
+		 {
+			 engineA = 0;
+			 engineB = 0;
+		 }
+
+		 pinData = P2IN&0x3;
+		 if(pinData) turnouts = 3;
+		 else turnouts = 0;
 	 }
 }
 
@@ -215,10 +232,28 @@ void createPackets(void)
 	//Generate packets from strings
 	for(i=0;i<2;i++)
 	{
+#ifdef TODO_ADD_SPEEDS
+		for(j=0;j<arrayLen(EngineAddress_strings[0]);j++)
+		{
+			updater(EngineAddress_strings[i][j],EngineAddress[i][j],arrayLen(EngineAddress_strings[0][0]),arrayLen(EngineAddress[0][0]));
+		}
+
+		for(j=0;j<arrayLen(EngineInstruction_strings[0]);j++)
+		{
+			updater(EngineInstruction_strings[i][j],EngineInstruction[i][j],arrayLen(EngineInstruction_strings[0][0]),arrayLen(EngineInstruction[0][0]));
+			errorStringGen(EngineAddress_strings[i][j],EngineInstruction_strings[i][j]);
+		}
+
+s		for(j=0;j<arrayLen(EngineError_strings[0]);j++)
+		{
+			updater(EngineError_strings[i][j],EngineError[i][j],arrayLen(EngineError_strings[0][0]),arrayLen(EngineError[0][0]));
+		}
+#else
 		for(j=0;j<arrayLen(Engine_strings[0]);j++)
 		{
 			updater(Engine_strings[i][j],Engine[i][j],arrayLen(Engine_strings[0][0]),arrayLen(Engine[0][0]));
 		}
+#endif
 		for(j=0;j<arrayLen(Turnout_strings[0]);j++)
 		{
 			updater(Turnout_strings[i][j],Turnout[i][j],arrayLen(Turnout_strings[0][0]),arrayLen(Turnout[0][0]));

@@ -13,5 +13,8 @@
 
 void initDCC_withSSI(int8_t interrupts_enabled);
 void SSIDataPut(FRAME_TYPE data);
+void init_comparator(void);
+void initCommands_withPORT1(void);
+
 
 #endif /* PERIPH_INITIALIZATION_H_ */

@@ -9,6 +9,27 @@
 #include "packetGen.h"
 
 
+void errorStringGen(const void *addressIn, const void* instructionIn, void*errorIn)
+{
+	//Read the first 8 bits (characters) of each string, calculate the xor packet, return it
+	int8_t i;
+	char* errorString = (char*)errorIn;
+	char* addrString = (char*)addressIn;
+	char* instrString = (char*)instructionIn;
+	uint16_t addressBit=0,instructionBit=0,errorBit=0;
+	for(i=0;i<=8;i++)
+	{
+		if(addrString[i] == '1')	addressBit 	=1;
+		else addressBit = 0;
+		if(instrString[i] == '1')	instructionBit = 1;
+		else instructionBit = 0;
+		errorBit = instructionBit^addressBit;
+		if(errorBit==1) errorString[i] = '1';
+		else errorString[i] = '0';
+	}
+	errorString[8] = '1';
+}
+
 size_t updater (const void* ary, void* dest, int8_t strlen,int8_t bytelen)
 {
 	/*

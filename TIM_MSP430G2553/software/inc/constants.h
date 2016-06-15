@@ -29,7 +29,7 @@
 #define FRAME_SIZE	(sizeof(FRAME_TYPE))
 #define FRAME_BITS	(8*FRAME_SIZE)
 #define DELAY 10000000
-#define IDLE_PAD 50
+#define IDLE_PAD 60
 
 //Supports 1 to 8 byte shift registers
 #define PREAMBLE_FRAME	((FRAME_TYPE)(0x55555555))
