@@ -9,7 +9,7 @@
 #include "packetGen.h"
 
 
-void errorStringGen(const void *addressIn, const void* instructionIn, void*errorIn)
+void errorStringGen(const void *addressIn, const void* instructionIn, void* errorIn)
 {
 	//Read the first 8 bits (characters) of each string, calculate the xor packet, return it
 	int8_t i;
@@ -17,9 +17,9 @@ void errorStringGen(const void *addressIn, const void* instructionIn, void*error
 	char* addrString = (char*)addressIn;
 	char* instrString = (char*)instructionIn;
 	uint16_t addressBit=0,instructionBit=0,errorBit=0;
-	for(i=0;i<=8;i++)
+	for(i=0;i<8;i++)
 	{
-		if(addrString[i] == '1')	addressBit 	=1;
+		if(addrString[i+1] == '1')	addressBit 	=1;
 		else addressBit = 0;
 		if(instrString[i] == '1')	instructionBit = 1;
 		else instructionBit = 0;
@@ -88,7 +88,7 @@ size_t updater (const void* ary, void* dest, int8_t strlen,int8_t bytelen)
 	{
 		while(!(cell & (3<<(PARTIALSHIFT+ALIGN) ) ))
 		{
-			cell = (cell << 2) | 0x1;
+			cell = (cell << 2) | PADDER; //padding of all 0s: inverted to high signal?
 		}
 		result[result_index]=cell;
 		result_index++;
@@ -97,11 +97,12 @@ size_t updater (const void* ary, void* dest, int8_t strlen,int8_t bytelen)
 	//To maintain uniform size for the arrays, pack any remaining empty frames with extra preamble bits
 	while(result_index < bytelen)
 	{
-		result[result_index]=PREAMBLE_FRAME;
+		result[result_index]=PADDER;
 		result_index++;
 	}
 
 	return result_index;
 }
+
 
 

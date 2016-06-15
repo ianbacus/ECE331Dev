@@ -21,9 +21,12 @@ void initDCC_withSSI(int8_t interrupts_enabled)
 	UCA0CTL1 &= ~UCSWRST;					// Initialize USCI state machine
 
 	//Configure baud rate: 17544 baud, SMCLK runs at 1.2MHz, prescaler  = 68
+/*
 	UCA0BR1 = 0; //MSByte
 	UCA0BR0 = 68; //LSByte
-
+*/
+	UCA0BR1 = 0x3; //MSByte
+	UCA0BR0 = 0x90; //LSByte
 	if(interrupts_enabled == 1)
 		IE2 |= UCA0TXIE;    // Enable USCI0 TX interrupt: indicates data has been written to shift register, more can be written
 }
@@ -42,9 +45,9 @@ void initDCC_withSSI(int8_t interrupts_enabled)
 void init_comparator(void)
 {
 
-    P1DIR |= BIT7;  //  P1.7 are outputs
-
-    CACTL2 = P2CA0;  // P1.0 = +comp
+    P1DIR |= BIT7;  //  P1.7 is output
+    P1DIR &= ~BIT0;
+    CACTL2 = P2CA0;  // P1.0 = +comp, input
     CACTL1 = CARSEL + CAREF_2 + CAON;  //  -comp = 0.5*Vcc; comparator on
     P1SEL |= BIT0 + BIT7;  // P1.7 updates based on CAOUT
 
@@ -52,9 +55,9 @@ void init_comparator(void)
 }
 void initCommands_withPORT1(void)
 {
-	//0111.1011 = 0x7b, pin 2 is used for SPI
-	P1DIR &= ~(0x7b);
-	P2DIR &= ~(BIT2);
+	//Port 1:
+	// inputs.. 0111.1010 = 0x7a, pin 2 is used for SPI
+	P1DIR &= ~(0x7a);
 }
 
 

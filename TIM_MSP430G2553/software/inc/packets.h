@@ -13,49 +13,43 @@
 #include "constants.h"
 
 //MSP430 only has 512B RAM, only so many engine commands can fit
-//Engine indices: [0] = A, [1] = B, [x][y] = speed y (msb=direction), works like a LUT
-const char Engine_strings[2][3][28] =
-#ifndef ZEROPACKETS
-{
-	{
-		"0000000000010000000010000001","0000000000010010010010010011","0000000000010011110010011111",
-	},
-	{
-		"0000000000010000000010000001","0000000000010010010010010011","0000000000010011110010011111",
-	},
-};
-#else
-{
-	{
-		"0000000100010000000010000101","0000000100010010010010010111","0000000100010111110010111011",
-	},
-	{
-		"0000000100010000000010000101","0000000100010010010010010111","0000000100010111110010111011",
-	},
-};
-#endif
 
-FRAME_TYPE Engine[2][3][14];
+const char EngineAddress_strings[2][10] =
+//These include a prepended start bit and an appended byte end bit (both zero)
+//WORKING ONE: "0000100010":2
+//WORKING ONE: "0000101110":4
+{"0000100010","0000101110"};
 
+const char EngineInstruction_strings[9][9] =
+{
+//Forward speeds
+	"011110100","011110110","011111110","011111110",
+//Reverse speeds
+	"010110100","010110110","010111110","010111110",
+//Speed zero
+	"010000000"
+};
+
+char EngineError_strings[2][arrayLen(EngineInstruction_strings)][9];
+
+FRAME_TYPE EngineError[arrayLen(EngineAddress_strings)][arrayLen(EngineInstruction_strings)][5];
+FRAME_TYPE EngineAddress[arrayLen(EngineAddress_strings)][5];
+FRAME_TYPE EngineInstruction[arrayLen(EngineInstruction_strings)][5];
 
 
 //Turnout indices: [0]=A, [1]=B, [x][0] = outer, [x][1] = inner
 const char Turnout_strings[2][2][28] =
 {
-	{"0000010010100001000100011011","0000010010100000000100010011"},{"0000010010100001010100011001","0000010010100001110100011101"}
+	{"0000010010100001000100011011","0000010010100000000100010011"},
+	{"0000010010100001010100011001","0000010010100001110100011101"}
 };
-FRAME_TYPE Turnout[2][2][14];
+FRAME_TYPE Turnout[2][arrayLen(Turnout_strings)][13];
 
-//Must precede any command. Any number of preamble bits greater than 12 can be sent. A zero following a valid preamble indicates the beginning of a packet on a decoder
-FRAME_TYPE Preamb[4] = {0x55,0x55,0x55,0x55};
 
 //Provides power to engines without affecting their behavior
  const char IdlePacket_string[28] = "0111111110000000000111111111";
-FRAME_TYPE IdlePacket[14];
+FRAME_TYPE IdlePacket[10];
 
-//Turns off power to an engine
- const char ResetPacket_string[28] = "0000000000000000000000000001";
-FRAME_TYPE ResetPacket[16];
 
 #ifdef REPROGRAM
 /*Configuration variables can be set using the instruction format

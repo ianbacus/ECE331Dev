@@ -1,10 +1,10 @@
 ******************************************************************************
                   MSP430 Linker PC v4.4.5                      
 ******************************************************************************
->> Linked Fri Mar 11 15:45:30 2016
+>> Linked Sat Mar 12 20:22:47 2016
 
 OUTPUT FILE NAME:   <TIM_MSP430g2553.out>
-ENTRY POINT SYMBOL: "_c_int00_noargs_noexit"  address: 0000c764
+ENTRY POINT SYMBOL: "_c_int00_noargs_noexit"  address: 0000c7a8
 
 
 MEMORY CONFIGURATION
@@ -14,12 +14,12 @@ MEMORY CONFIGURATION
   SFR                   00000000   00000010  00000000  00000010  RWIX
   PERIPHERALS_8BIT      00000010   000000f0  00000000  000000f0  RWIX
   PERIPHERALS_16BIT     00000100   00000100  00000000  00000100  RWIX
-  RAM                   00000200   00000200  00000110  000000f0  RWIX
+  RAM                   00000200   00000200  000001d7  00000029  RWIX
   INFOD                 00001000   00000040  00000000  00000040  RWIX
   INFOC                 00001040   00000040  00000000  00000040  RWIX
   INFOB                 00001080   00000040  00000000  00000040  RWIX
   INFOA                 000010c0   00000040  00000000  00000040  RWIX
-  FLASH                 0000c000   00003fde  0000098a  00003654  RWIX
+  FLASH                 0000c000   00003fde  0000094a  00003694  RWIX
   BSLSIGNATURE          0000ffde   00000002  00000002  00000000  RWIX  ffff 
   INT00                 0000ffe0   00000002  00000002  00000000  RWIX
   INT01                 0000ffe2   00000002  00000000  00000002  RWIX
@@ -44,56 +44,57 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.bss       0    00000200    000000aa     UNINITIALIZED
-                  00000200    00000054     (.common:Engine)
-                  00000254    00000038     (.common:Turnout)
-                  0000028c    00000010     (.common:ResetPacket)
-                  0000029c    0000000e     (.common:IdlePacket)
+.bss       0    00000200    00000172     UNINITIALIZED
+                  00000200    000000a2     (.common:EngineError_strings)
+                  000002a2    0000005a     (.common:EngineError)
+                  000002fc    00000034     (.common:Turnout)
+                  00000330    0000002e     (.common:EngineInstruction)
+                  0000035e    0000000a     (.common:EngineAddress)
+                  00000368    0000000a     (.common:IdlePacket)
 
-.data      0    000002aa    00000016     UNINITIALIZED
-                  000002aa    00000016     main.obj (.data)
+.data      0    00000372    00000015     UNINITIALIZED
+                  00000372    00000015     main.obj (.data)
 
 .TI.persistent 
-*          0    000002aa    00000000     UNINITIALIZED
+*          0    00000372    00000000     UNINITIALIZED
 
 .stack     0    000003b0    00000050     UNINITIALIZED
                   000003b0    00000002     rts430_eabi.lib : boot.obj (.stack)
                   000003b2    0000004e     --HOLE--
 
-.text      0    0000c000    00000812     
-                  0000c000    000002e6     main.obj (.text:SSI_IRQHandler)
-                  0000c2e6    000001be     packetGen.obj (.text:updater)
-                  0000c4a4    0000011c     main.obj (.text:createPackets)
-                  0000c5c0    00000082     main.obj (.text:main)
-                  0000c642    00000064     rts430_eabi.lib : copy_decompress_rle.obj (.text:__TI_decompress_rle_core)
-                  0000c6a6    00000058                     : autoinit.obj (.text:_auto_init)
-                  0000c6fe    0000003a     periph_initialization.obj (.text:initDCC_withSSI)
-                  0000c738    0000002c     rts430_eabi.lib : lsl16.obj (.text)
-                  0000c764    0000001a                     : boot_special.obj (.text:_c_int00_noargs_noexit)
-                  0000c77e    00000018     periph_initialization.obj (.text:init_comparator)
-                  0000c796    00000014     rts430_eabi.lib : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
-                  0000c7aa    00000014                     : mult16.obj (.text)
-                  0000c7be    00000012                     : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
-                  0000c7d0    00000012                     : memcpy.obj (.text:memcpy)
-                  0000c7e2    00000010                     : epilog.obj (.text)
-                  0000c7f2    0000000c     periph_initialization.obj (.text:initCommands_withPORT1)
-                  0000c7fe    00000006     rts430_eabi.lib : isr_trap.obj (.text:_isr:__TI_ISR_TRAP)
-                  0000c804    00000006                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
-                  0000c80a    00000004                     : pre_init.obj (.text:_system_pre_init)
-                  0000c80e    00000004                     : exit.obj (.text:abort)
+.text      0    0000c000    00000830     
+                  0000c000    00000312     main.obj (.text:SSI_IRQHandler)
+                  0000c312    00000184     packetGen.obj (.text:updater)
+                  0000c496    00000120     main.obj (.text:createPackets)
+                  0000c5b6    000000bc     main.obj (.text:main)
+                  0000c672    00000064     rts430_eabi.lib : copy_decompress_rle.obj (.text:__TI_decompress_rle_core$4)
+                  0000c6d6    00000058                     : autoinit.obj (.text:_auto_init)
+                  0000c72e    0000004e     packetGen.obj (.text:errorStringGen)
+                  0000c77c    0000002c     rts430_eabi.lib : lsl16.obj (.text)
+                  0000c7a8    0000001a                     : boot_special.obj (.text:_c_int00_noargs_noexit)
+                  0000c7c2    00000014                     : copy_zero_init.obj (.text:decompress:ZI:__TI_zero_init)
+                  0000c7d6    00000014                     : mult16.obj (.text)
+                  0000c7ea    00000012                     : copy_decompress_none.obj (.text:decompress:none:__TI_decompress_none)
+                  0000c7fc    00000010                     : memcpy.obj (.text:memcpy)
+                  0000c80c    00000010                     : epilog.obj (.text)
+                  0000c81c    00000006                     : isr_trap.obj (.text:_isr:__TI_ISR_TRAP)
+                  0000c822    00000006                     : copy_decompress_rle.obj (.text:decompress:rle24:__TI_decompress_rle24)
+                  0000c828    00000004                     : pre_init.obj (.text:_system_pre_init)
+                  0000c82c    00000004                     : exit.obj (.text:abort)
 
-.const     0    0000c812    00000150     
-                  0000c812    000000a8     main.obj (.const:Engine_strings)
-                  0000c8ba    00000070     main.obj (.const:Turnout_strings)
-                  0000c92a    0000001c     main.obj (.const:.string:IdlePacket_string)
-                  0000c946    0000001c     main.obj (.const:.string:ResetPacket_string)
+.const     0    0000c830    000000f2     
+                  0000c830    00000070     main.obj (.const:Turnout_strings)
+                  0000c8a0    00000051     main.obj (.const:EngineInstruction_strings)
+                  0000c8f1    00000001     --HOLE-- [fill = 0]
+                  0000c8f2    0000001c     main.obj (.const:.string:IdlePacket_string)
+                  0000c90e    00000014     main.obj (.const:EngineAddress_strings)
 
-.cinit     0    0000c962    00000028     
-                  0000c962    00000015     (.cinit..data.load) [load image, compression = rle]
-                  0000c977    00000001     --HOLE-- [fill = 0]
-                  0000c978    00000006     (__TI_handler_table)
-                  0000c97e    00000004     (.cinit..bss.load) [load image, compression = zero_init]
-                  0000c982    00000008     (__TI_cinit_table)
+.cinit     0    0000c922    00000028     
+                  0000c922    00000015     (.cinit..data.load) [load image, compression = rle]
+                  0000c937    00000001     --HOLE-- [fill = 0]
+                  0000c938    00000006     (__TI_handler_table)
+                  0000c93e    00000004     (.cinit..bss.load) [load image, compression = zero_init]
+                  0000c942    00000008     (__TI_cinit_table)
 
 .init_array 
 *          0    0000c000    00000000     UNINITIALIZED
@@ -115,7 +116,7 @@ ADC10      0    0000ffea    00000002
 
 USCIAB0TX 
 *          0    0000ffec    00000002     
-                  0000ffec    00000002     main.obj (.int06)
+                  0000ffec    00000002     <whole-program> (.int06)
 
 USCIAB0RX 
 *          0    0000ffee    00000002     
@@ -153,14 +154,14 @@ NMI        0    0000fffc    00000002
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000c982 records: 2, size/record: 4, table size: 8
-	.data: load addr=0000c962, load size=00000015 bytes, run addr=000002aa, run size=00000016 bytes, compression=rle
-	.bss: load addr=0000c97e, load size=00000004 bytes, run addr=00000200, run size=000000aa bytes, compression=zero_init
+__TI_cinit_table @ 0000c942 records: 2, size/record: 4, table size: 8
+	.data: load addr=0000c922, load size=00000015 bytes, run addr=00000372, run size=00000015 bytes, compression=rle
+	.bss: load addr=0000c93e, load size=00000004 bytes, run addr=00000200, run size=00000172 bytes, compression=zero_init
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 0000c978 records: 3, size/record: 2, table size: 6
+__TI_handler_table @ 0000c938 records: 3, size/record: 2, table size: 6
 	index: 0, handler: __TI_zero_init
 	index: 1, handler: __TI_decompress_rle24
 	index: 2, handler: __TI_decompress_none
@@ -168,369 +169,367 @@ __TI_handler_table @ 0000c978 records: 3, size/record: 2, table size: 6
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
 
-address   name                    
--------   ----                    
-0000004a  ADC10AE0                
-000001b0  ADC10CTL0               
-000001b2  ADC10CTL1               
-00000048  ADC10DTC0               
-00000049  ADC10DTC1               
-000001b4  ADC10MEM                
-000001bc  ADC10SA                 
-00000057  BCSCTL1                 
-00000058  BCSCTL2                 
-00000053  BCSCTL3                 
-0000c80e  C$$EXIT                 
-00000059  CACTL1                  
-0000005a  CACTL2                  
-000010fb  CALBC1_12MHZ            
-000010f9  CALBC1_16MHZ            
-000010ff  CALBC1_1MHZ             
-000010fd  CALBC1_8MHZ             
-000010fa  CALDCO_12MHZ            
-000010f8  CALDCO_16MHZ            
-000010fe  CALDCO_1MHZ             
-000010fc  CALDCO_8MHZ             
-0000005b  CAPD                    
-00000056  DCOCTL                  
-00000200  Engine                  
-0000c812  Engine_strings          
-00000128  FCTL1                   
-0000012a  FCTL2                   
-0000012c  FCTL3                   
-00000000  IE1                     
-00000001  IE2                     
-00000002  IFG1                    
-00000003  IFG2                    
-0000029c  IdlePacket              
-0000c92a  IdlePacket_string       
-00000022  P1DIR                   
-00000025  P1IE                    
-00000024  P1IES                   
-00000023  P1IFG                   
-00000020  P1IN                    
-00000021  P1OUT                   
-00000027  P1REN                   
-00000026  P1SEL                   
-00000041  P1SEL2                  
-0000002a  P2DIR                   
-0000002d  P2IE                    
-0000002c  P2IES                   
-0000002b  P2IFG                   
-00000028  P2IN                    
-00000029  P2OUT                   
-0000002f  P2REN                   
-0000002e  P2SEL                   
-00000042  P2SEL2                  
-0000001a  P3DIR                   
-00000018  P3IN                    
-00000019  P3OUT                   
-00000010  P3REN                   
-0000001b  P3SEL                   
-00000043  P3SEL2                  
-0000028c  ResetPacket             
-0000c946  ResetPacket_string      
-0000c000  SSI_IRQHandler          
-00000172  TA0CCR0                 
-00000174  TA0CCR1                 
-00000176  TA0CCR2                 
-00000162  TA0CCTL0                
-00000164  TA0CCTL1                
-00000166  TA0CCTL2                
-00000160  TA0CTL                  
-0000012e  TA0IV                   
-00000170  TA0R                    
-00000192  TA1CCR0                 
-00000194  TA1CCR1                 
-00000196  TA1CCR2                 
-00000182  TA1CCTL0                
-00000184  TA1CCTL1                
-00000186  TA1CCTL2                
-00000180  TA1CTL                  
-0000011e  TA1IV                   
-00000190  TA1R                    
-000010db  TLV_ADC10_1_LEN         
-000010da  TLV_ADC10_1_TAG         
-000010c0  TLV_CHECKSUM            
-000010f7  TLV_DCO_30_LEN          
-000010f6  TLV_DCO_30_TAG          
-00000254  Turnout                 
-0000c8ba  Turnout_strings         
-0000005d  UCA0ABCTL               
-00000062  UCA0BR0                 
-00000063  UCA0BR1                 
-00000060  UCA0CTL0                
-00000061  UCA0CTL1                
-0000005f  UCA0IRRCTL              
-0000005e  UCA0IRTCTL              
-00000064  UCA0MCTL                
-00000066  UCA0RXBUF               
-00000065  UCA0STAT                
-00000067  UCA0TXBUF               
-0000006a  UCB0BR0                 
-0000006b  UCB0BR1                 
-00000068  UCB0CTL0                
-00000069  UCB0CTL1                
-0000006c  UCB0I2CIE               
-00000118  UCB0I2COA               
-0000011a  UCB0I2CSA               
-0000006e  UCB0RXBUF               
-0000006d  UCB0STAT                
-0000006f  UCB0TXBUF               
-00000120  WDTCTL                  
-00000400  __STACK_END             
-00000050  __STACK_SIZE            
-0000c982  __TI_CINIT_Base         
-0000c98a  __TI_CINIT_Limit        
-0000c978  __TI_Handler_Table_Base 
-0000c97e  __TI_Handler_Table_Limit
-UNDEFED   __TI_INITARRAY_Base     
-UNDEFED   __TI_INITARRAY_Limit    
-0000c7fe  __TI_ISR_TRAP           
-0000c7be  __TI_decompress_none    
-0000c804  __TI_decompress_rle24   
-0000ffe0  __TI_int00              
-0000ffe4  __TI_int02              
-0000ffe6  __TI_int03              
-0000ffea  __TI_int05              
-0000ffec  __TI_int06              
-0000ffee  __TI_int07              
-0000fff0  __TI_int08              
-0000fff2  __TI_int09              
-0000fff4  __TI_int10              
-0000fff6  __TI_int11              
-0000fff8  __TI_int12              
-0000fffa  __TI_int13              
-0000fffc  __TI_int14              
-0000c796  __TI_zero_init          
-ffffffff  __binit__               
-ffffffff  __c_args__              
-0000c7ee  __mspabi_func_epilog_1  
-0000c7ec  __mspabi_func_epilog_2  
-0000c7ea  __mspabi_func_epilog_3  
-0000c7e8  __mspabi_func_epilog_4  
-0000c7e6  __mspabi_func_epilog_5  
-0000c7e4  __mspabi_func_epilog_6  
-0000c7e2  __mspabi_func_epilog_7  
-0000c7aa  __mspabi_mpyi           
-0000c7aa  __mspabi_mpyi_sw        
-0000c738  __mspabi_slli           
-0000c760  __mspabi_slli_1         
-0000c74e  __mspabi_slli_10        
-0000c74c  __mspabi_slli_11        
-0000c74a  __mspabi_slli_12        
-0000c748  __mspabi_slli_13        
-0000c746  __mspabi_slli_14        
-0000c744  __mspabi_slli_15        
-0000c75e  __mspabi_slli_2         
-0000c75c  __mspabi_slli_3         
-0000c75a  __mspabi_slli_4         
-0000c758  __mspabi_slli_5         
-0000c756  __mspabi_slli_6         
-0000c754  __mspabi_slli_7         
-0000c752  __mspabi_slli_8         
-0000c750  __mspabi_slli_9         
-0000c6a6  _auto_init              
-0000c764  _c_int00_noargs_noexit  
-0000fffe  _reset_vector           
-000003b0  _stack                  
-0000c80a  _system_pre_init        
-0000c80e  abort                   
-ffffffff  binit                   
-0000c4a4  createPackets           
-000002aa  engineA                 
-000002ab  engineB                 
-0000c7f2  initCommands_withPORT1  
-0000c6fe  initDCC_withSSI         
-0000c77e  init_comparator         
-0000c5c0  main                    
-0000c7d0  memcpy                  
-000002ae  resetFlag               
-000002ac  turnouts                
-0000c2e6  updater                 
+address   name                     
+-------   ----                     
+0000004a  ADC10AE0                 
+000001b0  ADC10CTL0                
+000001b2  ADC10CTL1                
+00000048  ADC10DTC0                
+00000049  ADC10DTC1                
+000001b4  ADC10MEM                 
+000001bc  ADC10SA                  
+00000057  BCSCTL1                  
+00000058  BCSCTL2                  
+00000053  BCSCTL3                  
+0000c82c  C$$EXIT                  
+00000059  CACTL1                   
+0000005a  CACTL2                   
+000010fb  CALBC1_12MHZ             
+000010f9  CALBC1_16MHZ             
+000010ff  CALBC1_1MHZ              
+000010fd  CALBC1_8MHZ              
+000010fa  CALDCO_12MHZ             
+000010f8  CALDCO_16MHZ             
+000010fe  CALDCO_1MHZ              
+000010fc  CALDCO_8MHZ              
+0000005b  CAPD                     
+00000056  DCOCTL                   
+0000035e  EngineAddress            
+0000c90e  EngineAddress_strings    
+000002a2  EngineError              
+00000200  EngineError_strings      
+00000330  EngineInstruction        
+0000c8a0  EngineInstruction_strings
+00000128  FCTL1                    
+0000012a  FCTL2                    
+0000012c  FCTL3                    
+00000000  IE1                      
+00000001  IE2                      
+00000002  IFG1                     
+00000003  IFG2                     
+00000368  IdlePacket               
+0000c8f2  IdlePacket_string        
+00000022  P1DIR                    
+00000025  P1IE                     
+00000024  P1IES                    
+00000023  P1IFG                    
+00000020  P1IN                     
+00000021  P1OUT                    
+00000027  P1REN                    
+00000026  P1SEL                    
+00000041  P1SEL2                   
+0000002a  P2DIR                    
+0000002d  P2IE                     
+0000002c  P2IES                    
+0000002b  P2IFG                    
+00000028  P2IN                     
+00000029  P2OUT                    
+0000002f  P2REN                    
+0000002e  P2SEL                    
+00000042  P2SEL2                   
+0000001a  P3DIR                    
+00000018  P3IN                     
+00000019  P3OUT                    
+00000010  P3REN                    
+0000001b  P3SEL                    
+00000043  P3SEL2                   
+0000c000  SSI_IRQHandler           
+00000172  TA0CCR0                  
+00000174  TA0CCR1                  
+00000176  TA0CCR2                  
+00000162  TA0CCTL0                 
+00000164  TA0CCTL1                 
+00000166  TA0CCTL2                 
+00000160  TA0CTL                   
+0000012e  TA0IV                    
+00000170  TA0R                     
+00000192  TA1CCR0                  
+00000194  TA1CCR1                  
+00000196  TA1CCR2                  
+00000182  TA1CCTL0                 
+00000184  TA1CCTL1                 
+00000186  TA1CCTL2                 
+00000180  TA1CTL                   
+0000011e  TA1IV                    
+00000190  TA1R                     
+000010db  TLV_ADC10_1_LEN          
+000010da  TLV_ADC10_1_TAG          
+000010c0  TLV_CHECKSUM             
+000010f7  TLV_DCO_30_LEN           
+000010f6  TLV_DCO_30_TAG           
+000002fc  Turnout                  
+0000c830  Turnout_strings          
+0000005d  UCA0ABCTL                
+00000062  UCA0BR0                  
+00000063  UCA0BR1                  
+00000060  UCA0CTL0                 
+00000061  UCA0CTL1                 
+0000005f  UCA0IRRCTL               
+0000005e  UCA0IRTCTL               
+00000064  UCA0MCTL                 
+00000066  UCA0RXBUF                
+00000065  UCA0STAT                 
+00000067  UCA0TXBUF                
+0000006a  UCB0BR0                  
+0000006b  UCB0BR1                  
+00000068  UCB0CTL0                 
+00000069  UCB0CTL1                 
+0000006c  UCB0I2CIE                
+00000118  UCB0I2COA                
+0000011a  UCB0I2CSA                
+0000006e  UCB0RXBUF                
+0000006d  UCB0STAT                 
+0000006f  UCB0TXBUF                
+00000120  WDTCTL                   
+00000400  __STACK_END              
+00000050  __STACK_SIZE             
+0000c942  __TI_CINIT_Base          
+0000c94a  __TI_CINIT_Limit         
+0000c938  __TI_Handler_Table_Base  
+0000c93e  __TI_Handler_Table_Limit 
+UNDEFED   __TI_INITARRAY_Base      
+UNDEFED   __TI_INITARRAY_Limit     
+0000c81c  __TI_ISR_TRAP            
+0000c7ea  __TI_decompress_none     
+0000c822  __TI_decompress_rle24    
+0000ffe0  __TI_int00               
+0000ffe4  __TI_int02               
+0000ffe6  __TI_int03               
+0000ffea  __TI_int05               
+0000ffec  __TI_int06               
+0000ffee  __TI_int07               
+0000fff0  __TI_int08               
+0000fff2  __TI_int09               
+0000fff4  __TI_int10               
+0000fff6  __TI_int11               
+0000fff8  __TI_int12               
+0000fffa  __TI_int13               
+0000fffc  __TI_int14               
+0000c7c2  __TI_zero_init           
+ffffffff  __binit__                
+ffffffff  __c_args__               
+0000c818  __mspabi_func_epilog_1   
+0000c816  __mspabi_func_epilog_2   
+0000c814  __mspabi_func_epilog_3   
+0000c812  __mspabi_func_epilog_4   
+0000c810  __mspabi_func_epilog_5   
+0000c80e  __mspabi_func_epilog_6   
+0000c80c  __mspabi_func_epilog_7   
+0000c7d6  __mspabi_mpyi            
+0000c7d6  __mspabi_mpyi_sw         
+0000c77c  __mspabi_slli            
+0000c7a4  __mspabi_slli_1          
+0000c792  __mspabi_slli_10         
+0000c790  __mspabi_slli_11         
+0000c78e  __mspabi_slli_12         
+0000c78c  __mspabi_slli_13         
+0000c78a  __mspabi_slli_14         
+0000c788  __mspabi_slli_15         
+0000c7a2  __mspabi_slli_2          
+0000c7a0  __mspabi_slli_3          
+0000c79e  __mspabi_slli_4          
+0000c79c  __mspabi_slli_5          
+0000c79a  __mspabi_slli_6          
+0000c798  __mspabi_slli_7          
+0000c796  __mspabi_slli_8          
+0000c794  __mspabi_slli_9          
+0000c6d6  _auto_init               
+0000c7a8  _c_int00_noargs_noexit   
+0000fffe  _reset_vector            
+000003b0  _stack                   
+0000c828  _system_pre_init         
+0000c82c  abort                    
+ffffffff  binit                    
+0000c496  createPackets            
+00000372  engineA                  
+00000373  engineB                  
+0000c72e  errorStringGen           
+0000c5b6  main                     
+0000c7fc  memcpy                   
+00000374  turnouts                 
+0000c312  updater                  
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
 
-address   name                    
--------   ----                    
-00000000  IE1                     
-00000001  IE2                     
-00000002  IFG1                    
-00000003  IFG2                    
-00000010  P3REN                   
-00000018  P3IN                    
-00000019  P3OUT                   
-0000001a  P3DIR                   
-0000001b  P3SEL                   
-00000020  P1IN                    
-00000021  P1OUT                   
-00000022  P1DIR                   
-00000023  P1IFG                   
-00000024  P1IES                   
-00000025  P1IE                    
-00000026  P1SEL                   
-00000027  P1REN                   
-00000028  P2IN                    
-00000029  P2OUT                   
-0000002a  P2DIR                   
-0000002b  P2IFG                   
-0000002c  P2IES                   
-0000002d  P2IE                    
-0000002e  P2SEL                   
-0000002f  P2REN                   
-00000041  P1SEL2                  
-00000042  P2SEL2                  
-00000043  P3SEL2                  
-00000048  ADC10DTC0               
-00000049  ADC10DTC1               
-0000004a  ADC10AE0                
-00000050  __STACK_SIZE            
-00000053  BCSCTL3                 
-00000056  DCOCTL                  
-00000057  BCSCTL1                 
-00000058  BCSCTL2                 
-00000059  CACTL1                  
-0000005a  CACTL2                  
-0000005b  CAPD                    
-0000005d  UCA0ABCTL               
-0000005e  UCA0IRTCTL              
-0000005f  UCA0IRRCTL              
-00000060  UCA0CTL0                
-00000061  UCA0CTL1                
-00000062  UCA0BR0                 
-00000063  UCA0BR1                 
-00000064  UCA0MCTL                
-00000065  UCA0STAT                
-00000066  UCA0RXBUF               
-00000067  UCA0TXBUF               
-00000068  UCB0CTL0                
-00000069  UCB0CTL1                
-0000006a  UCB0BR0                 
-0000006b  UCB0BR1                 
-0000006c  UCB0I2CIE               
-0000006d  UCB0STAT                
-0000006e  UCB0RXBUF               
-0000006f  UCB0TXBUF               
-00000118  UCB0I2COA               
-0000011a  UCB0I2CSA               
-0000011e  TA1IV                   
-00000120  WDTCTL                  
-00000128  FCTL1                   
-0000012a  FCTL2                   
-0000012c  FCTL3                   
-0000012e  TA0IV                   
-00000160  TA0CTL                  
-00000162  TA0CCTL0                
-00000164  TA0CCTL1                
-00000166  TA0CCTL2                
-00000170  TA0R                    
-00000172  TA0CCR0                 
-00000174  TA0CCR1                 
-00000176  TA0CCR2                 
-00000180  TA1CTL                  
-00000182  TA1CCTL0                
-00000184  TA1CCTL1                
-00000186  TA1CCTL2                
-00000190  TA1R                    
-00000192  TA1CCR0                 
-00000194  TA1CCR1                 
-00000196  TA1CCR2                 
-000001b0  ADC10CTL0               
-000001b2  ADC10CTL1               
-000001b4  ADC10MEM                
-000001bc  ADC10SA                 
-00000200  Engine                  
-00000254  Turnout                 
-0000028c  ResetPacket             
-0000029c  IdlePacket              
-000002aa  engineA                 
-000002ab  engineB                 
-000002ac  turnouts                
-000002ae  resetFlag               
-000003b0  _stack                  
-00000400  __STACK_END             
-000010c0  TLV_CHECKSUM            
-000010da  TLV_ADC10_1_TAG         
-000010db  TLV_ADC10_1_LEN         
-000010f6  TLV_DCO_30_TAG          
-000010f7  TLV_DCO_30_LEN          
-000010f8  CALDCO_16MHZ            
-000010f9  CALBC1_16MHZ            
-000010fa  CALDCO_12MHZ            
-000010fb  CALBC1_12MHZ            
-000010fc  CALDCO_8MHZ             
-000010fd  CALBC1_8MHZ             
-000010fe  CALDCO_1MHZ             
-000010ff  CALBC1_1MHZ             
-0000c000  SSI_IRQHandler          
-0000c2e6  updater                 
-0000c4a4  createPackets           
-0000c5c0  main                    
-0000c6a6  _auto_init              
-0000c6fe  initDCC_withSSI         
-0000c738  __mspabi_slli           
-0000c744  __mspabi_slli_15        
-0000c746  __mspabi_slli_14        
-0000c748  __mspabi_slli_13        
-0000c74a  __mspabi_slli_12        
-0000c74c  __mspabi_slli_11        
-0000c74e  __mspabi_slli_10        
-0000c750  __mspabi_slli_9         
-0000c752  __mspabi_slli_8         
-0000c754  __mspabi_slli_7         
-0000c756  __mspabi_slli_6         
-0000c758  __mspabi_slli_5         
-0000c75a  __mspabi_slli_4         
-0000c75c  __mspabi_slli_3         
-0000c75e  __mspabi_slli_2         
-0000c760  __mspabi_slli_1         
-0000c764  _c_int00_noargs_noexit  
-0000c77e  init_comparator         
-0000c796  __TI_zero_init          
-0000c7aa  __mspabi_mpyi           
-0000c7aa  __mspabi_mpyi_sw        
-0000c7be  __TI_decompress_none    
-0000c7d0  memcpy                  
-0000c7e2  __mspabi_func_epilog_7  
-0000c7e4  __mspabi_func_epilog_6  
-0000c7e6  __mspabi_func_epilog_5  
-0000c7e8  __mspabi_func_epilog_4  
-0000c7ea  __mspabi_func_epilog_3  
-0000c7ec  __mspabi_func_epilog_2  
-0000c7ee  __mspabi_func_epilog_1  
-0000c7f2  initCommands_withPORT1  
-0000c7fe  __TI_ISR_TRAP           
-0000c804  __TI_decompress_rle24   
-0000c80a  _system_pre_init        
-0000c80e  C$$EXIT                 
-0000c80e  abort                   
-0000c812  Engine_strings          
-0000c8ba  Turnout_strings         
-0000c92a  IdlePacket_string       
-0000c946  ResetPacket_string      
-0000c978  __TI_Handler_Table_Base 
-0000c97e  __TI_Handler_Table_Limit
-0000c982  __TI_CINIT_Base         
-0000c98a  __TI_CINIT_Limit        
-0000ffe0  __TI_int00              
-0000ffe4  __TI_int02              
-0000ffe6  __TI_int03              
-0000ffea  __TI_int05              
-0000ffec  __TI_int06              
-0000ffee  __TI_int07              
-0000fff0  __TI_int08              
-0000fff2  __TI_int09              
-0000fff4  __TI_int10              
-0000fff6  __TI_int11              
-0000fff8  __TI_int12              
-0000fffa  __TI_int13              
-0000fffc  __TI_int14              
-0000fffe  _reset_vector           
-ffffffff  __binit__               
-ffffffff  __c_args__              
-ffffffff  binit                   
-UNDEFED   __TI_INITARRAY_Base     
-UNDEFED   __TI_INITARRAY_Limit    
+address   name                     
+-------   ----                     
+00000000  IE1                      
+00000001  IE2                      
+00000002  IFG1                     
+00000003  IFG2                     
+00000010  P3REN                    
+00000018  P3IN                     
+00000019  P3OUT                    
+0000001a  P3DIR                    
+0000001b  P3SEL                    
+00000020  P1IN                     
+00000021  P1OUT                    
+00000022  P1DIR                    
+00000023  P1IFG                    
+00000024  P1IES                    
+00000025  P1IE                     
+00000026  P1SEL                    
+00000027  P1REN                    
+00000028  P2IN                     
+00000029  P2OUT                    
+0000002a  P2DIR                    
+0000002b  P2IFG                    
+0000002c  P2IES                    
+0000002d  P2IE                     
+0000002e  P2SEL                    
+0000002f  P2REN                    
+00000041  P1SEL2                   
+00000042  P2SEL2                   
+00000043  P3SEL2                   
+00000048  ADC10DTC0                
+00000049  ADC10DTC1                
+0000004a  ADC10AE0                 
+00000050  __STACK_SIZE             
+00000053  BCSCTL3                  
+00000056  DCOCTL                   
+00000057  BCSCTL1                  
+00000058  BCSCTL2                  
+00000059  CACTL1                   
+0000005a  CACTL2                   
+0000005b  CAPD                     
+0000005d  UCA0ABCTL                
+0000005e  UCA0IRTCTL               
+0000005f  UCA0IRRCTL               
+00000060  UCA0CTL0                 
+00000061  UCA0CTL1                 
+00000062  UCA0BR0                  
+00000063  UCA0BR1                  
+00000064  UCA0MCTL                 
+00000065  UCA0STAT                 
+00000066  UCA0RXBUF                
+00000067  UCA0TXBUF                
+00000068  UCB0CTL0                 
+00000069  UCB0CTL1                 
+0000006a  UCB0BR0                  
+0000006b  UCB0BR1                  
+0000006c  UCB0I2CIE                
+0000006d  UCB0STAT                 
+0000006e  UCB0RXBUF                
+0000006f  UCB0TXBUF                
+00000118  UCB0I2COA                
+0000011a  UCB0I2CSA                
+0000011e  TA1IV                    
+00000120  WDTCTL                   
+00000128  FCTL1                    
+0000012a  FCTL2                    
+0000012c  FCTL3                    
+0000012e  TA0IV                    
+00000160  TA0CTL                   
+00000162  TA0CCTL0                 
+00000164  TA0CCTL1                 
+00000166  TA0CCTL2                 
+00000170  TA0R                     
+00000172  TA0CCR0                  
+00000174  TA0CCR1                  
+00000176  TA0CCR2                  
+00000180  TA1CTL                   
+00000182  TA1CCTL0                 
+00000184  TA1CCTL1                 
+00000186  TA1CCTL2                 
+00000190  TA1R                     
+00000192  TA1CCR0                  
+00000194  TA1CCR1                  
+00000196  TA1CCR2                  
+000001b0  ADC10CTL0                
+000001b2  ADC10CTL1                
+000001b4  ADC10MEM                 
+000001bc  ADC10SA                  
+00000200  EngineError_strings      
+000002a2  EngineError              
+000002fc  Turnout                  
+00000330  EngineInstruction        
+0000035e  EngineAddress            
+00000368  IdlePacket               
+00000372  engineA                  
+00000373  engineB                  
+00000374  turnouts                 
+000003b0  _stack                   
+00000400  __STACK_END              
+000010c0  TLV_CHECKSUM             
+000010da  TLV_ADC10_1_TAG          
+000010db  TLV_ADC10_1_LEN          
+000010f6  TLV_DCO_30_TAG           
+000010f7  TLV_DCO_30_LEN           
+000010f8  CALDCO_16MHZ             
+000010f9  CALBC1_16MHZ             
+000010fa  CALDCO_12MHZ             
+000010fb  CALBC1_12MHZ             
+000010fc  CALDCO_8MHZ              
+000010fd  CALBC1_8MHZ              
+000010fe  CALDCO_1MHZ              
+000010ff  CALBC1_1MHZ              
+0000c000  SSI_IRQHandler           
+0000c312  updater                  
+0000c496  createPackets            
+0000c5b6  main                     
+0000c6d6  _auto_init               
+0000c72e  errorStringGen           
+0000c77c  __mspabi_slli            
+0000c788  __mspabi_slli_15         
+0000c78a  __mspabi_slli_14         
+0000c78c  __mspabi_slli_13         
+0000c78e  __mspabi_slli_12         
+0000c790  __mspabi_slli_11         
+0000c792  __mspabi_slli_10         
+0000c794  __mspabi_slli_9          
+0000c796  __mspabi_slli_8          
+0000c798  __mspabi_slli_7          
+0000c79a  __mspabi_slli_6          
+0000c79c  __mspabi_slli_5          
+0000c79e  __mspabi_slli_4          
+0000c7a0  __mspabi_slli_3          
+0000c7a2  __mspabi_slli_2          
+0000c7a4  __mspabi_slli_1          
+0000c7a8  _c_int00_noargs_noexit   
+0000c7c2  __TI_zero_init           
+0000c7d6  __mspabi_mpyi            
+0000c7d6  __mspabi_mpyi_sw         
+0000c7ea  __TI_decompress_none     
+0000c7fc  memcpy                   
+0000c80c  __mspabi_func_epilog_7   
+0000c80e  __mspabi_func_epilog_6   
+0000c810  __mspabi_func_epilog_5   
+0000c812  __mspabi_func_epilog_4   
+0000c814  __mspabi_func_epilog_3   
+0000c816  __mspabi_func_epilog_2   
+0000c818  __mspabi_func_epilog_1   
+0000c81c  __TI_ISR_TRAP            
+0000c822  __TI_decompress_rle24    
+0000c828  _system_pre_init         
+0000c82c  C$$EXIT                  
+0000c82c  abort                    
+0000c830  Turnout_strings          
+0000c8a0  EngineInstruction_strings
+0000c8f2  IdlePacket_string        
+0000c90e  EngineAddress_strings    
+0000c938  __TI_Handler_Table_Base  
+0000c93e  __TI_Handler_Table_Limit 
+0000c942  __TI_CINIT_Base          
+0000c94a  __TI_CINIT_Limit         
+0000ffe0  __TI_int00               
+0000ffe4  __TI_int02               
+0000ffe6  __TI_int03               
+0000ffea  __TI_int05               
+0000ffec  __TI_int06               
+0000ffee  __TI_int07               
+0000fff0  __TI_int08               
+0000fff2  __TI_int09               
+0000fff4  __TI_int10               
+0000fff6  __TI_int11               
+0000fff8  __TI_int12               
+0000fffa  __TI_int13               
+0000fffc  __TI_int14               
+0000fffe  _reset_vector            
+ffffffff  __binit__                
+ffffffff  __c_args__               
+ffffffff  binit                    
+UNDEFED   __TI_INITARRAY_Base      
+UNDEFED   __TI_INITARRAY_Limit     
 
-[178 symbols]
+[177 symbols]

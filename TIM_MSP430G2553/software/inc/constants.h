@@ -29,8 +29,15 @@
 #define FRAME_SIZE	(sizeof(FRAME_TYPE))
 #define FRAME_BITS	(8*FRAME_SIZE)
 #define DELAY 10000000
-#define IDLE_PAD 60
+#define IDLE_PAD 100
+#define PKT_RESEND_MAX 3
 
+//2-bit pattern used as a filler for packets to maintain alignment
+//Must be useable between bytes of packets to work properly
+#define PADDER 0x0
+
+
+//Must precede any command. Any number of preamble bits greater than 12 can be sent. A zero following a valid preamble indicates the beginning of a packet on a decoder
 //Supports 1 to 8 byte shift registers
 #define PREAMBLE_FRAME	((FRAME_TYPE)(0x55555555))
 #define PREAMBLE_LEN	(4/FRAME_SIZE)
@@ -41,6 +48,10 @@ typedef enum
 	Reset,Idle,Preamble, LocoA, LocoB, TurnA, TurnB
 } TX_state_t;
 
+typedef enum
+{
+	Address,Instruction,Error
+} Loco_state_t;
 
 #endif
 
