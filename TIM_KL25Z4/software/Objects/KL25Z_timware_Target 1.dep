@@ -1,0 +1,44 @@
+Dependencies for Project 'KL25Z_timware', Target 'Target 1': (DO NOT MODIFY !)
+F (.\source\packetGen.c)(0x57617600)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\inc-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4-o .\objects\packetgen.o --omf_browse .\objects\packetgen.crf --depend .\objects\packetgen.d)
+I (.\inc\packetGen.h)(0x56E32242)
+I (.\inc\constants.h)(0x56E6FC67)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569EAF1A)
+F (.\source\main.c)(0x5761887B)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\inc-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (.\inc\constants.h)(0x56E6FC67)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569EAF1A)
+I (.\inc\periph_initialization.h)(0x56E225A1)
+I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include\MKL25z4.h)(0x5644E17A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h)(0x56266DDC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56265A20)
+I (C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x5644E17A)
+I (.\inc\packetGen.h)(0x56E32242)
+I (.\inc\packets.h)(0x57618DA5)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x569EAF1A)
+F (.\source\periph_initialization.c)(0x57618E18)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections -I .\inc-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4-o .\objects\periph_initialization.o --omf_browse .\objects\periph_initialization.crf --depend .\objects\periph_initialization.d)
+I (.\inc\periph_initialization.h)(0x56E225A1)
+I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include\MKL25z4.h)(0x5644E17A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h)(0x56266DDC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56265A20)
+I (C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x5644E17A)
+I (.\inc\constants.h)(0x56E6FC67)
+I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x569EAF1A)
+F (RTE\Device\MKL25Z128xxx4\startup_MKL25Z4.s)(0x5644E17A)(--cpu Cortex-M0+ --pd "__EVAL SETA 1" -g --apcs=interwork -I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include--pd "__UVISION_VERSION SETA 518" --pd "_RTE_ SETA 1" --pd "MKL25Z128xxx4 SETA 1"--list .\listings\startup_mkl25z4.lst --xref -o .\objects\startup_mkl25z4.o --depend .\objects\startup_mkl25z4.d)
+F (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.c)(0x5644E17A)(-c --cpu Cortex-M0+ -D__EVAL -g -O0 --apcs=interwork --split_sections-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE-I C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include-I C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include-D__UVISION_VERSION="518" -D_RTE_ -DMKL25Z128xxx4-o .\objects\system_mkl25z4.o --omf_browse .\objects\system_mkl25z4.crf --depend .\objects\system_mkl25z4.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x569EAF1A)
+I (C:\Keil_v5\ARM\PACK\Keil\Kinetis_KLxx_DFP\1.10.0\Device\Include\MKL25Z4.h)(0x5644E17A)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cm0plus.h)(0x56266DDC)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmInstr.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\cmsis_armcc.h)(0x56265A20)
+I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include\core_cmFunc.h)(0x56265A20)
+I (C:\Users\amsaclab\Documents\ECE331\TIMWARE\V2\RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x5644E17A)
+F (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x5644E17A)()
