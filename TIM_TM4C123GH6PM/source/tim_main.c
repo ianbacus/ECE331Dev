@@ -77,28 +77,29 @@ char train_error3   = 0;
 #define DCC_ZERO 2*1370 // delays for 107 us
 
 int
-main(void)
+main2(void)
 
-{
+ {
 
   int turnout_update = 0;
-  int train_update = 0;
+  int train_update = 0x1f<<1;
 
   // Setup the system clock to run at 80 Mhz from PLL with crystal reference
     SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|
                     SYSCTL_OSC_MAIN);
 
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOB); // DCC Signal Output
+    GPIOPinTypeGPIOOutput( GPIO_PORTB_BASE , GPIO_PIN_0 );
+
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE); // speed, direction, train select bits
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD); // turnout select bits
     SysCtlDelay(5);                // Delay for a few seconds while peripherals enable
 
     GPIOPinTypeGPIOOutput( GPIO_PORTB_BASE , GPIO_PIN_0 );
     // GPIO_PORT_E is input port for speed, train select, and direction
-    GPIOPinTypeGPIOInput(GPIO_PORTE_BASE, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
-        GPIO_PIN_4 | GPIO_PIN_5);
+//    GPIOPinTypeGPIOInput(GPIO_PORTE_BASE, GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5);
     // GPIO_PORT_D is input port for the track turnout selects
-    GPIOPinTypeGPIOInput(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1);
+ //   GPIOPinTypeGPIOInput(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1);
 
     GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_0, 0x00  ); // force DCC signal low until needed
 
@@ -117,12 +118,12 @@ main(void)
 
       turnout_update = GPIOPinRead( GPIO_PORTD_BASE, GPIO_PIN_0|GPIO_PIN_1 );
 
-      train_update = GPIOPinRead( GPIO_PORTE_BASE, GPIO_PIN_1|GPIO_PIN_2|
-          GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);
+      train_update = GPIOPinRead( GPIO_PORTE_BASE, GPIO_PIN_1|GPIO_PIN_2| GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5);
 
       UpdateTrains(train_update);
 
-      //SysCtlDelay(100000);
+      GPIOPinWrite(GPIO_PORTB_BASE, GPIO_PIN_0, 0x00  ); // force DCC signal low until needed
+      SysCtlDelay(200000);
 
       UpdateTurnouts( turnout_update );
 

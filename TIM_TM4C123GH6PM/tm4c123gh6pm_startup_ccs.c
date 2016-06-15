@@ -2,7 +2,7 @@
 //
 // Startup code for use with TI's Code Composer Studio.
 //
-// Copyright (c) 2011-2013 Texas Instruments Incorporated.  All rights reserved.
+// Copyright (c) 2011-2014 Texas Instruments Incorporated.  All rights reserved.
 // Software License Agreement
 // 
 // Software License Agreement
@@ -124,7 +124,7 @@ void (* const g_pfnVectors[])(void) =
     IntDefaultHandler,                      // Quadrature Encoder 1
     IntDefaultHandler,                      // CAN0
     IntDefaultHandler,                      // CAN1
-    IntDefaultHandler,                      // CAN2
+    0,                                      // Reserved
     0,                                      // Reserved
     IntDefaultHandler,                      // Hibernate
     IntDefaultHandler,                      // USB0
