@@ -20,30 +20,17 @@ void initDCC_withSSI(int8_t interrupts_enabled)
 	UCA0CTL0 |= UCMST + UCMSB + UCSYNC;		// synchronous mode, MSB first, SPI master, 8bit xfer
 	UCA0CTL1 &= ~UCSWRST;					// Initialize USCI state machine
 
-	//Configure baud rate: 17544 baud, SMCLK runs at 1.2MHz, prescaler  = 68
-/*
-	UCA0BR1 = 0; //MSByte
-	UCA0BR0 = 68; //LSByte
-*/
+	//Configure baud rate: 17544 baud, SMCLK runs at 16 MHz
+
 	UCA0BR1 = 0x3; //MSByte
 	UCA0BR0 = 0x90; //LSByte
 	if(interrupts_enabled == 1)
 		IE2 |= UCA0TXIE;    // Enable USCI0 TX interrupt: indicates data has been written to shift register, more can be written
 }
-/*
-* For this setup Vcc = 3.53 V
-*  reference = Vcc/2 = 1.77 V
-*        Vin = 1.76 V and higher: green LED on?
-*        Vin = 1.70 V and lower: red LED on?
-*
-*/
-
-#define GREEN    BIT0
-#define RED      BIT6
-#define SWITCH   BIT3
 
 void init_comparator(void)
 {
+	//Comparator is used to drive DCC. Input is fed from internal reference and SPI output
 
     P1DIR |= BIT7;  //  P1.7 is output
     P1DIR &= ~BIT0;

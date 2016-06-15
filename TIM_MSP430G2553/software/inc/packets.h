@@ -15,17 +15,18 @@
 //MSP430 only has 512B RAM, only so many engine commands can fit
 
 const char EngineAddress_strings[2][10] =
-//These include a prepended start bit and an appended byte end bit (both zero)
-//WORKING ONE: "0000100010":2
-//WORKING ONE: "0000101110":4
+//"0000100010":2 (engine A)
+//"0000101110":4 (engine B)
 {"0000100010","0000101110"};
+
 
 const char EngineInstruction_strings[9][9] =
 {
-//Forward speeds
-	"011110100","011110110","011111110","011111110",
-//Reverse speeds
-	"010110100","010110110","010111110","010111110",
+//		   steps: 7,  14,  21,  28
+//Forward speeds: 1, 2-3, 4-5, 6-7
+	"011001100","011110000","011011000","011111110",
+//Reverse speeds: 1, 2-3, 4-5, 6-7
+	"010001100","010110000","010011000","010111110",
 //Speed zero
 	"010000000"
 };
