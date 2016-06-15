@@ -45,11 +45,11 @@ void UpdateTrains(int portE);
 // TURNOUT DCC SIGNAL COMMANDS!!!
 // THESE ARE PROPRIETARY TO BACHMANN TURNOUTS!
 //*****************************************************************************
-char turnout_addrA_open[28] = "0000010010100001000100011011";
-//char turnout_addrA_close[28] ="0000010010100001000100011011";
-char turnout_addrA_close[28]  = "0000010010100000000100010011";
-char turnout_addrB_open[28] = "0000010010100001110100011101";
-char turnout_addrB_close[28]  = "0000010010100001010100011001";
+char turnout_addr3_close[28] = "0000010010100001000100011011";
+//char turnout_addr3_open[28] ="0000010010100001000100011011";
+char turnout_addr3_open[28]  = "0000010010100000000100010011";
+char turnout_addr2_close[28] = "0000010010100001110100011101";
+char turnout_addr2_open[28]  = "0000010010100001010100011001";
 
 //*****************************************************************************
 // TRAIN ADDRESSES FOLLOW THE DCC STANDARD!
@@ -58,16 +58,16 @@ char turnout_addrB_close[28]  = "0000010010100001010100011001";
 /******************************************************************************/
 // current state of turnouts stored here. for reference in turnout functions
 /******************************************************************************/
-int turnout_addrA_state = 0;
-int turnout_addrB_state = 0;
+int turnout_addr3_state = 0;
+int turnout_addr2_state = 0;
 /******************************************************************************/
 // values to update the train with are stored here
 /******************************************************************************/
 int train_state = 0;
 char train_addr2    = 0x02;
-char train_addr4    = 0x04;
-volatile char train_command2 = 0x40;
-volatile char train_command4 = 0x40;
+char train_addr3    = 0x03;
+volatile char train_command2 = 0x60;
+volatile char train_command3 = 0x60;
 char train_error2   = 0;
 char train_error3   = 0;
 
@@ -172,37 +172,37 @@ void CreateOne(void) {
 
 void UpdateTurnouts(int portD) {
   int j; //simple counter variable
-  if( ((portD&0x0002) != turnout_addrB_state) ) {
-    turnout_addrB_state = portD&0x0002; //turnout B
-    if( (turnout_addrB_state > 0) ) {
+  if( ((portD&0x0001) != turnout_addr2_state) ) {
+    turnout_addr2_state = portD&0x0001;
+    if( (turnout_addr2_state > 0) ) {
       Preamble();
       for( j = 0; j < 28 ; j++ ) {
-        if (turnout_addrB_close[j] == '1' ) { CreateOne(); }
+        if (turnout_addr2_close[j] == '1' ) { CreateOne(); }
         else { CreateZero(); }
       }
     }
     else {
       Preamble();
       for( j = 0; j < 28 ; j++ ) {
-        if (turnout_addrB_open[j] == '1' ) { CreateOne(); }
+        if (turnout_addr2_open[j] == '1' ) { CreateOne(); }
         else { CreateZero(); }
       }
     }
   }
   SysCtlDelay(50); // slight delay between tracks
-  if( (portD&0x0001) != turnout_addrA_state ) {
-    turnout_addrA_state = portD&0x0001;//turnout A
-    if( (turnout_addrA_state > 0) ) {
+  if( (portD&0x0002) != turnout_addr3_state ) {
+    turnout_addr3_state = portD&0x0002;
+    if( (turnout_addr3_state > 0) ) {
       Preamble();
       for( j = 0; j < 28 ; j++ ) {
-        if (turnout_addrA_close[j] == '1' ) { CreateOne(); }
+        if (turnout_addr3_close[j] == '1' ) { CreateOne(); }
         else { CreateZero(); }
       }
     }
     else {
       Preamble();
       for( j = 0; j < 28 ; j++ ) {
-        if (turnout_addrA_open[j] == '1' ) { CreateOne(); }
+        if (turnout_addr3_open[j] == '1' ) { CreateOne(); }
         else { CreateZero(); }
       }
     }
@@ -216,21 +216,21 @@ void UpdateTurnouts(int portD) {
    // Update train state with portE
    //train_state = portE;
      // train command has changed
-   shiftTemp = portE&0x10;   // get the direction bit
-   shiftTemp = shiftTemp << 1; // shift direction bit one left
+   shiftTemp = portE&0x20;   // get the direction bit
+   //shiftTemp = shiftTemp << 1; // shift direction bit one left
    /* AND portE w/ 0E to get 0000XXX0, which is speed */
    shiftTemp = shiftTemp|(portE&0x0E); // add speed bits to tempShift
-   if( portE&0x20 ) {
-     //train 4 selected
-     train_command4 = 0x40;
-     train_command4 = train_command4|shiftTemp; // speed bits and direction added to train command
-     train_error3 = train_command4^train_addr4;
+   if( portE&0x10 ) {
+     //train 3 selected
+     train_command3 = 0x60;
+     train_command3 = train_command3|shiftTemp; // speed bits and direction added to train command
+     train_error3 = train_command3^train_addr3;
      // shift direction bit into place
    }
    else
    {
      // do train 2
-     train_command2 = 0x40;
+     train_command2 = 0x60;
      train_command2 = train_command2|shiftTemp; // speed bits and direction added to train command
      train_error2 = train_command2^train_addr2;
    }
@@ -266,14 +266,14 @@ void UpdateTurnouts(int portD) {
    Preamble();
    CreateZero();
    for( dccCount = 0; dccCount < 8; dccCount++) {
-     if(shifter&train_addr4) { CreateOne(); }
+     if(shifter&train_addr3) { CreateOne(); }
      else { CreateZero(); }
      shifter = shifter >> 1;
    }
    CreateZero();
    shifter = 0x80;
    for( dccCount = 0; dccCount < 8; dccCount++) {
-     if(shifter&train_command4) { CreateOne(); }
+     if(shifter&train_command3) { CreateOne(); }
      else { CreateZero(); }
      shifter = shifter >> 1;
    }
