@@ -1,0 +1,1 @@
+"./source/main.obj" "./source/packetGen.obj" "./source/periph_initialization.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
